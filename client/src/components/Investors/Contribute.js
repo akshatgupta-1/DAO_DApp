@@ -1,7 +1,26 @@
 import "./investors.css"
 function Contribute({state,account}){
+
+
+  async function contribute(event){
+
+    try{
+
+    
+    event.preventDefault();
+    const {contract} = state;
+    const amount = document.querySelector("#weiValue").value;
+
+    await contract.methods.contribution().send({from : account, gas: 480000, value: amount});
+    }catch(error){
+      alert(error)
+  }
+  window.location.reload()
+}
+
+
  return<>
- <form >
+ <form onSubmit={contribute}>
    <label className="label1" htmlFor="weiValue">
    <span className="font">Contribution Amount: </span>
         </label>

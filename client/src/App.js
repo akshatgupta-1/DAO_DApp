@@ -56,6 +56,21 @@ function App() {
   };
   
 //code for account balance
+useEffect(()=>{
+  const {web3} = state;
+  async function getBalance(){
+
+    if(account != "Not connected"){
+      const balanceWei = await web3.eth.getBalance(account);
+      const balanceEth = web3.utils.fromWei(balanceWei)
+      setBalance(balanceEth);
+    }
+    
+  }
+  web3 && getBalance();
+
+},[state,account])
+
   return (
     <div className="App">
    <h1>Decentralize Autonoumous Organization</h1>

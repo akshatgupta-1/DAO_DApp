@@ -1,8 +1,28 @@
 import "./manager.css"
 function CreateProposal({state,account}){
     
-   
-    return<><form >
+    
+    async function proposalCreation(event){
+
+        try{
+        event.preventDefault();//page will not reload if form gets submitted
+
+        const {contract} = state;  //fetching contract
+        const description = document.querySelector("#description").value;
+        const amount = document.querySelector("#amount").value;
+        const recipient = document.querySelector("#recipient").value;
+
+        await contract.methods.createProposal(description,amount,recipient).send({from : account , gas : 480000});
+
+        }catch(error){
+            alert(error)
+        }
+        window.location.reload()
+
+    }
+
+
+    return<><form onSubmit={proposalCreation}>
     <label className="label1" htmlFor="name">
     <span className="font">Description:</span>
     </label>
