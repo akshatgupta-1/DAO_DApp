@@ -10,6 +10,8 @@ function InvestorList({state}){
       async function investorList(){
          const invlist = await contract.methods.InvestorList().call();
          setList(invlist)
+
+         
       }
 
       contract && investorList()
